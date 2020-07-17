@@ -9,6 +9,43 @@ File file;
 #define CS_PIN 10
 #define buz 7
 
+void successSound() {
+  tone(buz, 2000);
+  delay(300);
+  noTone(buz);
+  delay(100);
+  tone(buz, 2000);
+  delay(300);
+  noTone(buz);
+
+}
+
+void Errsound() {
+  /* bool change = false;
+    if (now - prev >= intervalBuz) {
+     // save the last time you blinked the LED
+     prev = now;
+
+
+     if (!change) {
+       change = true;
+       noTone(buz);
+       tone(buz, 2000);
+     }
+     else {
+       change = false;
+       noTone(buz);
+       tone(buz, 3000);
+     }
+    }
+  */
+  tone(buz, 2000);
+  delay(300);
+  noTone(buz);
+  tone(buz, 3000);
+  delay(300);
+  noTone(buz);
+}
 void setup() {
   delay(2000);
   pinMode(10, OUTPUT);
@@ -34,6 +71,7 @@ void setup() {
 
   char fileName[15];
   sprintf(fileName, "%d-%d-%d.csv", fix.dateTime.date, fix.dateTime.month, fix.dateTime.year);
+
   if (!sd.exists(fileName)) { //if file doesnt exist
     Serial.println(F("fileName doesnt exists. creating"));
     file = sd.open(fileName, FILE_WRITE);//create it
@@ -85,51 +123,10 @@ void SDwrite() {
     file.print(fix.latitudeL());
     file.print(F(","));
     file.print(fix.longitudeL());
-    //    file.print(",");
-    //    file.println(fix.altitude());
-
-  }
-  if (fix.valid.altitude) {
-    file.print(F(","));
-    file.print(F(","));
+    file.print(",");
     file.println(fix.altitude());
     file.flush();
+    //TODO: check if fix.altitude.valid then write bc it writes 0 when it isnt and isnt pretty
+
   }
-}
-
-void Errsound() {
-  /* bool change = false;
-    if (now - prev >= intervalBuz) {
-     // save the last time you blinked the LED
-     prev = now;
-
-
-     if (!change) {
-       change = true;
-       noTone(buz);
-       tone(buz, 2000);
-     }
-     else {
-       change = false;
-       noTone(buz);
-       tone(buz, 3000);
-     }
-    }
-  */
-  tone(buz, 2000);
-  delay(300);
-  noTone(buz);
-  tone(buz, 3000);
-  delay(300);
-  noTone(buz);
-}
-void successSound() {
-  tone(buz, 2000);
-  delay(300);
-  noTone(buz);
-  delay(100);
-  tone(buz, 2000);
-  delay(300);
-  noTone(buz);
-
 }
