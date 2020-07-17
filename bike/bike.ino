@@ -85,16 +85,12 @@ void SDwrite() {
     file.print(fix.latitudeL());
     file.print(F(","));
     file.print(fix.longitudeL());
-    //    file.print(",");
-    //    file.println(fix.altitude());
-
-  }
-  if (fix.valid.altitude) {
-    file.print(F(","));
-    file.print(F(","));
     file.println(fix.altitude());
     file.flush();
+    //TODO: check if fix.altitude is valid and then write it else will print 0
+
   }
+  
 }
 
 void Errsound() {
