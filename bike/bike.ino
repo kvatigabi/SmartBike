@@ -35,15 +35,6 @@ void setup() {
     lcd.setCursor(0, 1);
     lcd.print(F("SD ERR"));
   }
-  //  do {
-  //    gps.available(Serial1);
-  //    fix = gps.read();
-  //    Serial.println("do..while loop");
-  //  } while (!fix.valid.date);
-  //
-  //  char fileName[15];
-  //  sprintf(fileName, "%d-%d-%d.csv", fix.dateTime.date, fix.dateTime.month, fix.dateTime.year);
-  //  CreateFilename(fileName);
 }
 
 void loop() {
@@ -121,8 +112,6 @@ void rpmISR() {
 }
 
 void CreateFilename(char fileName[15]) {
-  //  if (!sd.exists(fileName)) { //if file doesnt exist
-  //    Serial.println(F("fileName doesnt exists. creating"));
   file = sd.open(fileName, FILE_WRITE);//create/open it
   if (file) { //if it opened corerectly write this below
     file.print(F("Time"));
@@ -137,12 +126,5 @@ void CreateFilename(char fileName[15]) {
   }
   else {
     Serial.println(F("could not create/open file"));
-}
-
-//  else {//if it exists just open it lol
-//    file = sd.open(fileName, FILE_WRITE);
-//    if (!file) {
-//      Serial.println(F("file exist but couldnt open"));
-//    }
-//  }
+  }
 }
