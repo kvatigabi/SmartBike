@@ -1,2 +1,2 @@
 # SmartBike
-Bike with datalogging powerd by Arduino
+Bike with datalogging powered by Arduino
